@@ -3,6 +3,7 @@ const context = canvas.getContext("2d", { alpha: false });
 const runway = document.querySelector(".hero-runway");
 const heroStage = document.querySelector(".hero-stage");
 const heroBeats = [...document.querySelectorAll("[data-beat]")];
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const frameCache = new Map();
 const maxCachedFrames = 28;
 let framePaths = [];
@@ -12,6 +13,10 @@ let drawQueued = false;
 let previousBeat = -1;
 let viewportWidth = 0;
 let viewportHeight = 0;
+
+function clamp(value, min, max) {
+  return Math.min(max, Math.max(min, value));
+}
 
 function resizeCanvas() {
   const bounds = heroStage.getBoundingClientRect();
@@ -25,7 +30,7 @@ function resizeCanvas() {
 }
 
 function drawFrame(index) {
-  if (!framePaths.length) return;
+  if (!framePaths.length || !viewportWidth || !viewportHeight) return;
   const image = frameCache.get(index);
   if (!image?.complete || !image.naturalWidth) {
     loadFrame(index, true);
@@ -40,6 +45,7 @@ function drawFrame(index) {
   context.clearRect(0, 0, viewportWidth, viewportHeight);
   context.drawImage(image, (viewportWidth - width) / 2, (viewportHeight - height) / 2, width, height);
   currentFrame = index;
+  heroStage.classList.add("has-frame");
 }
 
 function loadFrame(index, drawWhenReady = false) {
@@ -65,9 +71,21 @@ function scheduleDraw() {
   drawQueued = true;
   requestAnimationFrame(() => {
     drawQueued = false;
-    const scrollableDistance = runway.offsetHeight - window.innerHeight;
-    const progress = Math.min(1, Math.max(0, -runway.getBoundingClientRect().top / scrollableDistance));
+    const scrollableDistance = Math.max(1, runway.offsetHeight - window.innerHeight);
+    const progress = reducedMotion.matches
+      ? 0
+      : clamp(-runway.getBoundingClientRect().top / scrollableDistance, 0, 1);
+    const revealProgress = clamp(progress / 0.08, 0, 1);
+    const exitProgress = clamp((progress - 0.93) / 0.07, 0, 1);
+    const blurLimit = window.innerWidth <= 760 ? 3 : 8;
     requestedFrame = Math.round(progress * (framePaths.length - 1));
+
+    heroStage.style.setProperty("--stage-opacity", (1 - exitProgress * 0.34).toFixed(3));
+    heroStage.style.setProperty("--media-scale", (1.035 + progress * 0.04).toFixed(3));
+    heroStage.style.setProperty("--media-y", `${((progress - 0.5) * -20).toFixed(1)}px`);
+    heroStage.style.setProperty("--media-blur", `${(1 - revealProgress) * blurLimit}px`);
+    heroStage.style.setProperty("--glow-y", `${((progress - 0.5) * 18).toFixed(1)}px`);
+
     const beat = Math.min(2, Math.floor(progress * 3));
     if (beat !== previousBeat) {
       heroBeats.forEach((element, index) => element.classList.toggle("is-active", index === beat));
@@ -101,6 +119,7 @@ async function initializeHero() {
 
 window.addEventListener("scroll", scheduleDraw, { passive: true });
 window.addEventListener("resize", resizeCanvas, { passive: true });
+reducedMotion.addEventListener("change", scheduleDraw);
 resizeCanvas();
 initializeHero();
 
