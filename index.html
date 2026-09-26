@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0507" />
+    <meta name="description" content="BLOOM. Colour, in its most natural state." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="preload" as="image" href="assets/hero-frames/frame_0000.webp" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>BLOOM — Colour, in its most natural state</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="wordmark" href="#home" aria-label="Bloom home">BLOOM<span class="wordmark-period">.</span></a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#collection">Collection</a>
+        <a href="#story">Story</a>
+        <a href="#ingredients">Ingredients</a>
+        <a href="#shop">Shop</a>
+      </nav>
+      <a class="bag-link" href="#shop" aria-label="Shopping bag, 0 items">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l1 12h-15l1-12Z" /><path d="M9 9V6a3 3 0 0 1 6 0v3" /></svg>
+        <span class="bag-count">0</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </header>
+
+    <main>
+      <section class="hero-runway" id="home" aria-label="A rose in bloom">
+        <div class="hero-stage">
+          <canvas class="hero-canvas" aria-hidden="true"></canvas>
+          <div class="hero-shade"></div>
+          <div class="hero-copy hero-copy-first is-active" data-beat="0">
+            <p class="eyebrow">A study in becoming</p>
+            <h1>Colour,<br />in its most<br /><em>natural state.</em></h1>
+            <a class="text-link" href="#collection">Discover the collection <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="hero-copy hero-copy-second" data-beat="1">
+            <p class="eyebrow">Made slowly. Worn freely.</p>
+            <h2>Let nature<br />leave its <em>mark.</em></h2>
+          </div>
+          <div class="hero-copy hero-copy-third" data-beat="2">
+            <p class="eyebrow">BLOOM, in full</p>
+            <h2>Rooted in nature.<br /><em>Made for you.</em></h2>
+            <a class="text-link" href="#shop">Find your shade <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="hero-caption"><span>01</span><span class="caption-rule"></span><span>AN EXERCISE IN COLOUR</span></div>
+          <div class="scroll-cue"><span>Scroll to unfold</span><span class="scroll-line"></span></div>
+          <p class="frame-status" aria-live="polite">An expression of nature</p>
+        </div>
+      </section>
+
+      <section class="collection section-wrap" id="collection">
+        <div class="collection-copy reveal">
+          <p class="eyebrow">The colour collection</p>
+          <h2>As individual<br />as a <em>petal.</em></h2>
+          <p class="body-copy">A considered edit of colour, made to feel like your own. Softly saturated, beautifully lasting, and never anything less than you.</p>
+          <a class="text-link text-link-dark" href="#shop">Explore the collection <span aria-hidden="true">↗</span></a>
+          <span class="section-index">01 / THE COLLECTION</span>
+        </div>
+        <figure class="collection-image reveal">
+          <img src="images/lipstick-08-finished-standing.jpeg.jpg" alt="BLOOM lipstick, sculpted in warm rose red" loading="lazy" />
+          <figcaption>THE BLOOM SIGNATURE / 01</figcaption>
+        </figure>
+        <div class="collection-detail reveal">
+          <img src="images/lipstick-06-petals-falling.jpeg.jpg" alt="Rose petals falling in soft light" loading="lazy" />
+          <p>Real colour.<br /><em>Real feeling.</em></p>
+        </div>
+      </section>
+
+      <section class="story-band" id="story">
+        <div class="story-image"><img src="images/lipstick-10-woman-applying-front.jpeg.jpg" alt="Woman applying BLOOM red lipstick" loading="lazy" /></div>
+        <div class="story-copy reveal">
+          <p class="eyebrow">A little more human</p>
+          <h2>Beauty should<br />feel like <em>you.</em></h2>
+          <p class="body-copy">We believe the best version of beauty begins with what already exists. A gesture, a feeling, a colour you can't quite name. That's where we begin, too.</p>
+          <a class="text-link" href="#ingredients">Our point of view <span aria-hidden="true">↗</span></a>
+          <span class="story-note">BLOOM / EST. IN NATURE</span>
+        </div>
+      </section>
+
+      <section class="ingredients section-wrap" id="ingredients">
+        <div class="ingredients-heading reveal">
+          <p class="eyebrow">Thoughtfully, from the ground up</p>
+          <h2>Nothing to hide.<br /><em>Everything to feel.</em></h2>
+        </div>
+        <div class="ingredient-image reveal">
+          <img src="images/lipstick-07-pigment-mold.jpeg.jpg" alt="Rich red pigment taking shape" loading="lazy" />
+          <span class="ingredient-stamp">PLANT<br />FORWARD</span>
+        </div>
+        <div class="ingredient-note reveal">
+          <span class="ingredient-number">01</span>
+          <h3>Considered<br />by nature.</h3>
+          <p class="body-copy">Every formula begins with carefully chosen ingredients and a little more intention. Comfort first. Colour that feels like a second skin.</p>
+          <a class="text-link text-link-dark" href="#shop">Explore our ingredients <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="shade-section" id="shop">
+        <div class="shade-intro reveal">
+          <p class="eyebrow">Find the one that feels like you</p>
+          <h2>Your colour.<br /><em>Your call.</em></h2>
+          <p class="body-copy">Five shades, each with a life of its own. Meet yours.</p>
+        </div>
+        <div class="shade-product reveal">
+          <div class="product-image-frame">
+            <img src="images/lipstick-08-finished-standing.jpeg.jpg" alt="BLOOM lipstick in Rosewood" loading="lazy" />
+            <span class="product-swatch" aria-hidden="true"></span>
+          </div>
+          <div class="product-details">
+            <div><p class="eyebrow">The botanical lipstick</p><h3 class="shade-name">Rosewood</h3></div>
+            <p class="product-price">$38</p>
+          </div>
+          <p class="shade-description">A soft, lived-in red with the warmth of a late summer rose.</p>
+          <div class="shade-picker" role="group" aria-label="Choose a lipstick shade">
+            <button class="shade-dot is-selected" style="--shade:#873d47" data-name="Rosewood" data-description="A soft, lived-in red with the warmth of a late summer rose." aria-label="Rosewood" aria-pressed="true"></button>
+            <button class="shade-dot" style="--shade:#b66f72" data-name="Petal" data-description="A sheer blush pink, like the first colour of morning." aria-label="Petal" aria-pressed="false"></button>
+            <button class="shade-dot" style="--shade:#642832" data-name="Wild Rose" data-description="A deeper berry-red that leaves a little room for mystery." aria-label="Wild Rose" aria-pressed="false"></button>
+            <button class="shade-dot" style="--shade:#a65a38" data-name="Poppy" data-description="A sun-warmed terracotta that never tries too hard." aria-label="Poppy" aria-pressed="false"></button>
+            <button class="shade-dot" style="--shade:#a94c50" data-name="Ritual" data-description="A confident, just-bitten red for every day that matters." aria-label="Ritual" aria-pressed="false"></button>
+            <span class="shade-label">CHOOSE A SHADE</span>
+          </div>
+          <button class="add-button" type="button"><span>Add to bag</span><span class="add-price">$38</span></button>
+          <p class="bag-confirmation" aria-live="polite"></p>
+        </div>
+        <div class="shade-side-note"><span>02</span><span class="caption-rule"></span><span>FIVE EXPRESSIONS</span></div>
+      </section>
+
+      <section class="editorial-cta">
+        <img src="images/lipstick-05-rose-full-bloom.jpeg.jpg" alt="A rose in its full bloom" loading="lazy" />
+        <div class="editorial-wash"></div>
+        <div class="editorial-copy reveal">
+          <p class="eyebrow">A softer kind of statement</p>
+          <h2>Come into<br /><em>your own.</em></h2>
+          <a class="outline-link" href="#shop">Meet BLOOM <span aria-hidden="true">↗</span></a>
+        </div>
+        <span class="editorial-foot">BEAUTY, IN ITS OWN TIME</span>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="wordmark footer-wordmark" href="#home">BLOOM<span class="wordmark-period">.</span></a>
+      <p>Colour, in its most natural state.</p>
+      <nav aria-label="Footer navigation"><a href="#collection">Collection</a><a href="#story">Our story</a><a href="#ingredients">Ingredients</a><a href="#shop">Shop</a></nav>
+      <span class="copyright">© BLOOM 2026</span>
+    </footer>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
