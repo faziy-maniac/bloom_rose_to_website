@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0507" />
+    <meta name="description" content="Explore the Rosaliaaa collection across lips, face, eyes, skincare, and fragrance." />
+    <meta property="og:title" content="Shop Rosaliaaa" />
+    <meta property="og:description" content="Colour, care, and small rituals to make your own." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Shop Rosaliaaa</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="Rosaliaaa home">Rosaliaaa<span class="wordmark-period">.</span></a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="/#collection">Collection</a>
+        <a href="/#story">Story</a>
+        <a href="/#ingredients">Ingredients</a>
+        <a href="/shop/" aria-current="page">Shop</a>
+        <button class="mobile-nav-account" type="button" data-open-auth>Sign in</button>
+      </nav>
+      <div class="header-actions">
+        <button class="account-btn" type="button" data-open-auth aria-label="Account">
+          <span class="account-btn-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+          </span>
+          <span class="account-btn-label">Sign in</span>
+        </button>
+        <a class="bag-link" href="#cart-dialog" aria-label="Shopping bag, 0 items">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l1 12h-15l1-12Z" /><path d="M9 9V6a3 3 0 0 1 6 0v3" /></svg>
+          <span class="bag-count">0</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
+      </div>
+    </header>
+
+    <main class="shop-page">
+      <header class="shop-heading">
+        <p class="eyebrow">The Rosaliaaa collection</p>
+        <h1>Find what feels<br /><em>like you.</em></h1>
+        <p class="body-copy">Thoughtful colour and care for every part of your daily ritual.</p>
+      </header>
+      <section class="shop-catalog" aria-label="Product catalog">
+        <div class="shop-toolbar">
+          <p class="shop-count" id="shop-count" role="status">Loading the collection...</p>
+          <button class="text-link quiz-launch" type="button" data-open-quiz>Find your match <span aria-hidden="true">↗</span></button>
+        </div>
+        <nav class="category-tabs" id="category-tabs" aria-label="Filter products by category"></nav>
+        <div class="product-grid shop-product-grid" id="product-grid" aria-live="polite">
+          <p class="catalog-message">Loading products...</p>
+        </div>
+        <p class="store-status" id="store-status" role="status">Connecting to the Rosaliaaa collection...</p>
+      </section>
+    </main>
+
+    <footer class="site-footer shop-footer">
+      <a class="wordmark footer-wordmark" href="/">Rosaliaaa<span class="wordmark-period">.</span></a>
+      <p>Colour, in its most natural state.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/#collection">Collection</a><a href="/#story">Our story</a><a href="/#ingredients">Ingredients</a><a href="/shop/">Shop</a>
+        <button class="footer-journal" type="button" data-open-journal>Your journal</button>
+      </nav>
+      <span class="copyright">© Rosaliaaa 2026</span>
+    </footer>
+
+    <dialog class="store-dialog" id="cart-dialog" aria-labelledby="cart-title">
+      <div class="dialog-heading"><h2 id="cart-title">Your bag</h2><button class="dialog-close" type="button" data-close-dialog aria-label="Close bag">×</button></div>
+      <div id="cart-content"><p class="catalog-message">Your bag is empty.</p></div>
+      <div class="cart-summary"><span>Subtotal</span><strong id="cart-subtotal">$0.00</strong></div>
+      <p class="dialog-note">Shipping and taxes are calculated at checkout.</p>
+      <button class="add-button checkout-button" type="button" id="checkout-button" disabled><span>Place order</span><span aria-hidden="true">↗</span></button>
+      <p class="dialog-feedback" id="checkout-feedback" role="status"></p>
+    </dialog>
+
+    <dialog class="store-dialog" id="quiz-dialog" aria-labelledby="quiz-title">
+      <div class="dialog-heading"><h2 id="quiz-title">A little about you</h2><button class="dialog-close" type="button" data-close-dialog aria-label="Close quiz">×</button></div>
+      <form id="quiz-form" class="quiz-form">
+        <label>What are you exploring?
+          <select name="category" required><option value="lips">Lips</option><option value="face">Face</option><option value="eyes">Eyes</option><option value="skincare">Skincare</option><option value="fragrance">Fragrance</option></select>
+        </label>
+        <label>What should it feel like?
+          <select name="mood" required><option value="soft">Soft and understated</option><option value="fresh">Fresh and bright</option><option value="bold">A little more vivid</option><option value="comfort">Comforting and calm</option></select>
+        </label>
+        <label>What matters most today?
+          <select name="need" required><option value="everyday">Everyday ease</option><option value="hydration">Comfort and hydration</option><option value="definition">Definition and colour</option><option value="ritual">A slower ritual</option></select>
+        </label>
+        <button class="add-button" type="submit"><span>Find my match</span><span aria-hidden="true">↗</span></button>
+      </form>
+      <div id="quiz-result" class="quiz-result" aria-live="polite"></div>
+    </dialog>
+
+    <dialog class="store-dialog journal-dialog" id="journal-dialog" aria-labelledby="journal-title">
+      <div class="dialog-heading"><h2 id="journal-title">Your Rosaliaaa journal</h2><button class="dialog-close" type="button" data-close-dialog aria-label="Close journal">×</button></div>
+      <section><h3>Your latest match</h3><div id="journal-match"><p class="catalog-message">Your first match will appear here.</p></div></section>
+      <section><h3>Order history</h3><div id="journal-orders"><p class="catalog-message">No past orders yet.</p></div></section>
+    </dialog>
+
+    <dialog class="store-dialog auth-dialog" id="auth-dialog" aria-labelledby="auth-title">
+      <div class="dialog-heading">
+        <h2 id="auth-title">Sign in</h2>
+        <button class="dialog-close" type="button" data-close-dialog aria-label="Close dialog">×</button>
+      </div>
+
+      <div class="auth-tabs" id="auth-tabs" role="tablist">
+        <button class="auth-tab is-active" type="button" role="tab" data-auth-tab="signin" aria-selected="true">Sign in</button>
+        <button class="auth-tab" type="button" role="tab" data-auth-tab="signup" aria-selected="false">Create account</button>
+      </div>
+
+      <div id="auth-feedback" class="auth-feedback is-error" role="alert" hidden></div>
+      <div id="auth-success" class="auth-feedback is-success" role="status" hidden></div>
+
+      <form class="auth-form" id="auth-form">
+        <p class="auth-linking-note" id="auth-linking-note" hidden>
+          Your current bag and journal matches will stay preserved and attached to your new account.
+        </p>
+
+        <label for="auth-email">Email
+          <input type="email" id="auth-email" name="email" required autocomplete="email" placeholder="you@example.com" />
+        </label>
+
+        <label for="auth-password">Password
+          <input type="password" id="auth-password" name="password" required minlength="6" autocomplete="current-password" placeholder="At least 6 characters" />
+        </label>
+
+        <button class="add-button auth-submit-btn" type="submit" id="auth-submit">
+          <span id="auth-submit-text">Sign in</span>
+          <span aria-hidden="true">↗</span>
+        </button>
+
+        <p class="auth-toggle-note">
+          <span id="auth-toggle-text">Don't have an account yet?</span>
+          <button type="button" class="text-button" id="auth-toggle-btn">Create one</button>
+        </p>
+      </form>
+
+      <div class="auth-logged-in" id="auth-logged-in-view" hidden>
+        <div class="auth-user-card">
+          <p class="auth-user-greeting">Signed in as</p>
+          <p class="auth-user-email" id="auth-user-email"></p>
+          <p class="auth-sync-status">Your bag, order history, and beauty journal are safely synced to this account.</p>
+        </div>
+        <button class="add-button auth-logout-btn" type="button" id="logout-btn">
+          <span>Log out</span>
+          <span aria-hidden="true">→</span>
+        </button>
+      </div>
+    </dialog>
+
+    <script src="/site-ui.js" defer></script>
+    <script type="module" src="/store-ui.js"></script>
+  </body>
+</html>

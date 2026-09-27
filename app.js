@@ -10,6 +10,7 @@ let framePaths = [];
 let currentFrame = -1;
 let requestedFrame = 0;
 let drawQueued = false;
+let resizeQueued = false;
 let previousBeat = -1;
 let viewportWidth = 0;
 let viewportHeight = 0;
@@ -20,13 +21,22 @@ function clamp(value, min, max) {
 
 function resizeCanvas() {
   const bounds = heroStage.getBoundingClientRect();
-  const ratio = Math.min(window.devicePixelRatio || 1, 2);
+  const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
   viewportWidth = bounds.width;
   viewportHeight = bounds.height;
   canvas.width = Math.round(viewportWidth * ratio);
   canvas.height = Math.round(viewportHeight * ratio);
   context.setTransform(ratio, 0, 0, ratio, 0, 0);
   drawFrame(requestedFrame);
+}
+
+function scheduleResize() {
+  if (resizeQueued) return;
+  resizeQueued = true;
+  requestAnimationFrame(() => {
+    resizeQueued = false;
+    resizeCanvas();
+  });
 }
 
 function drawFrame(index) {
@@ -75,15 +85,12 @@ function scheduleDraw() {
     const progress = reducedMotion.matches
       ? 0
       : clamp(-runway.getBoundingClientRect().top / scrollableDistance, 0, 1);
-    const revealProgress = clamp(progress / 0.08, 0, 1);
     const exitProgress = clamp((progress - 0.93) / 0.07, 0, 1);
-    const blurLimit = window.innerWidth <= 760 ? 3 : 8;
     requestedFrame = Math.round(progress * (framePaths.length - 1));
 
     heroStage.style.setProperty("--stage-opacity", (1 - exitProgress * 0.34).toFixed(3));
     heroStage.style.setProperty("--media-scale", (1.035 + progress * 0.04).toFixed(3));
     heroStage.style.setProperty("--media-y", `${((progress - 0.5) * -20).toFixed(1)}px`);
-    heroStage.style.setProperty("--media-blur", `${(1 - revealProgress) * blurLimit}px`);
     heroStage.style.setProperty("--glow-y", `${((progress - 0.5) * 18).toFixed(1)}px`);
 
     const beat = Math.min(2, Math.floor(progress * 3));
@@ -113,12 +120,12 @@ async function initializeHero() {
     for (let index = 1; index < Math.min(framePaths.length, 12); index += 1) loadFrame(index);
     scheduleDraw();
   } catch (error) {
-    console.error("Unable to initialize the BLOOM hero sequence:", error);
+    console.error("Unable to initialize the Rosaliaaa hero sequence:", error);
   }
 }
 
 window.addEventListener("scroll", scheduleDraw, { passive: true });
-window.addEventListener("resize", resizeCanvas, { passive: true });
+window.addEventListener("resize", scheduleResize, { passive: true });
 reducedMotion.addEventListener("change", scheduleDraw);
 resizeCanvas();
 initializeHero();
@@ -132,44 +139,3 @@ const revealObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.16 });
 document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
-
-const shadeButtons = [...document.querySelectorAll(".shade-dot")];
-const shadeName = document.querySelector(".shade-name");
-const shadeDescription = document.querySelector(".shade-description");
-const productSwatch = document.querySelector(".product-swatch");
-shadeButtons.forEach((button) => button.addEventListener("click", () => {
-  shadeButtons.forEach((shade) => {
-    const selected = shade === button;
-    shade.classList.toggle("is-selected", selected);
-    shade.setAttribute("aria-pressed", String(selected));
-  });
-  shadeName.textContent = button.dataset.name;
-  shadeDescription.textContent = button.dataset.description;
-  productSwatch.style.backgroundColor = getComputedStyle(button).getPropertyValue("--shade");
-}));
-
-const bagCount = document.querySelector(".bag-count");
-const bagLink = document.querySelector(".bag-link");
-const addButton = document.querySelector(".add-button");
-const bagConfirmation = document.querySelector(".bag-confirmation");
-let itemCount = 0;
-addButton.addEventListener("click", () => {
-  itemCount += 1;
-  bagCount.textContent = String(itemCount);
-  bagLink.setAttribute("aria-label", `Shopping bag, ${itemCount} ${itemCount === 1 ? "item" : "items"}`);
-  bagConfirmation.textContent = `${shadeName.textContent} added to your bag.`;
-});
-
-const menuToggle = document.querySelector(".menu-toggle");
-const navigation = document.querySelector(".desktop-nav");
-menuToggle.addEventListener("click", () => {
-  const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
-  menuToggle.setAttribute("aria-expanded", String(!isOpen));
-  menuToggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
-  navigation.classList.toggle("is-open", !isOpen);
-});
-navigation.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
-  menuToggle.setAttribute("aria-expanded", "false");
-  menuToggle.setAttribute("aria-label", "Open navigation");
-  navigation.classList.remove("is-open");
-}));

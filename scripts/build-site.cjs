@@ -1,15 +1,39 @@
 const fs = require("node:fs");
 const path = require("node:path");
+const esbuild = require("esbuild");
 
 const projectRoot = path.resolve(__dirname, "..");
 const outputDirectory = path.join(projectRoot, "dist");
-const siteFiles = ["index.html", "styles.css", "app.js", "images", "assets/hero-frames"];
+const siteFiles = [
+  "index.html",
+  "styles.css",
+  "app.js",
+  "site-ui.js",
+  "images",
+  "assets",
+  "shop",
+];
 
 fs.rmSync(outputDirectory, { recursive: true, force: true });
 fs.mkdirSync(outputDirectory, { recursive: true });
 
 for (const file of siteFiles) {
-  fs.cpSync(path.join(projectRoot, file), path.join(outputDirectory, file), { recursive: true });
+  const src = path.join(projectRoot, file);
+  if (fs.existsSync(src)) {
+    const options = file === "images"
+      ? { recursive: true, filter: (source) => source === src || path.extname(source).toLowerCase() === ".webp" }
+      : { recursive: true };
+    fs.cpSync(src, path.join(outputDirectory, file), options);
+  }
 }
 
-console.log(`Prepared static site in ${outputDirectory}`);
+esbuild.buildSync({
+  entryPoints: [path.join(projectRoot, "store-ui.js")],
+  bundle: true,
+  format: "esm",
+  platform: "browser",
+  target: ["es2020"],
+  outfile: path.join(outputDirectory, "store-ui.js"),
+});
+
+console.log(`Prepared Rosaliaaa static site in ${outputDirectory}`);
