@@ -219,7 +219,124 @@ h1 em, h2 em, .collection-detail em { color: #d89791; font-weight: 400; }
 .journal-dialog section + section { margin-top: 23px; padding-top: 5px; border-top: 1px solid rgba(241,233,223,.18); }
 .order-entry { padding: 13px 0; border-top: 1px solid rgba(241,233,223,.12); }
 .order-entry p { margin: 4px 0; color: #c2b5b1; font-size: 10px; line-height: 1.6; }
-.shop-page { min-height: 100vh; padding: 158px 11vw 140px; background: var(--ink); }
+/* Live Natural Botanical Backdrop & Atmospheric Aesthetic */
+.shop-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 158px 11vw 140px;
+  background: radial-gradient(ellipse at 50% 15%, #18090d 0%, #0d0608 45%, #070305 100%);
+  isolation: isolate;
+  overflow: clip;
+}
+
+.shop-natural-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  user-select: none;
+}
+
+.shop-aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.shop-aurora-1 {
+  width: min(70vw, 850px);
+  height: min(70vw, 850px);
+  top: -15%;
+  left: -12%;
+  background: radial-gradient(circle, rgba(183, 80, 96, 0.22) 0%, rgba(138, 48, 64, 0.08) 50%, transparent 70%);
+  animation: aurora-drift-1 24s ease-in-out infinite alternate;
+}
+
+.shop-aurora-2 {
+  width: min(60vw, 750px);
+  height: min(60vw, 750px);
+  top: 25%;
+  right: -10%;
+  background: radial-gradient(circle, rgba(206, 126, 96, 0.18) 0%, rgba(154, 82, 60, 0.06) 52%, transparent 72%);
+  animation: aurora-drift-2 28s ease-in-out infinite alternate;
+}
+
+.shop-aurora-3 {
+  width: min(75vw, 920px);
+  height: min(75vw, 920px);
+  bottom: -20%;
+  left: 20%;
+  background: radial-gradient(circle, rgba(46, 68, 54, 0.22) 0%, rgba(28, 45, 34, 0.08) 50%, transparent 72%);
+  animation: aurora-drift-3 32s ease-in-out infinite alternate;
+}
+
+.shop-aurora-4 {
+  width: min(55vw, 680px);
+  height: min(55vw, 680px);
+  top: 55%;
+  left: -8%;
+  background: radial-gradient(circle, rgba(160, 72, 88, 0.16) 0%, transparent 68%);
+  animation: aurora-drift-1 20s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes aurora-drift-1 {
+  0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.55; }
+  50% { transform: translate3d(6vw, 8vh, 0) scale(1.12); opacity: 0.8; }
+  100% { transform: translate3d(-4vw, 14vh, 0) scale(0.95); opacity: 0.6; }
+}
+
+@keyframes aurora-drift-2 {
+  0% { transform: translate3d(0, 0, 0) scale(1.05); opacity: 0.6; }
+  50% { transform: translate3d(-8vw, -10vh, 0) scale(0.92); opacity: 0.82; }
+  100% { transform: translate3d(-3vw, 8vh, 0) scale(1.1); opacity: 0.52; }
+}
+
+@keyframes aurora-drift-3 {
+  0% { transform: translate3d(0, 0, 0) scale(0.95); opacity: 0.5; }
+  50% { transform: translate3d(7vw, -6vh, 0) scale(1.08); opacity: 0.78; }
+  100% { transform: translate3d(-5vw, -12vh, 0) scale(1); opacity: 0.55; }
+}
+
+.shop-petals-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.shop-grain-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.038;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+}
+
+.shop-mouse-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.85;
+  background: radial-gradient(700px circle at var(--mouse-x, 50%) var(--mouse-y, 35%), rgba(216, 151, 145, 0.08) 0%, rgba(164, 80, 90, 0.025) 42%, transparent 70%);
+  transition: opacity 0.5s ease;
+}
+
+.shop-heading,
+.shop-catalog {
+  position: relative;
+  z-index: 1;
+}
+
 .shop-heading { max-width: 720px; margin: 0 auto 75px; }
 .shop-heading h1 { margin: 0; font-family: var(--serif); font-size: 92px; font-weight: 400; line-height: .84; }
 .shop-heading h1 em { color: #d89791; font-weight: 400; }
@@ -227,9 +344,136 @@ h1 em, h2 em, .collection-detail em { color: #d89791; font-weight: 400; }
 .shop-catalog { max-width: 1250px; margin: 0 auto; }
 .shop-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 30px; }
 .shop-count { margin: 0; color: #c2b5b1; font-size: 10px; }
-.shop-product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 42px 24px; }
-.shop-product-grid .store-product-image { aspect-ratio: 1 / 1.08; }
-.shop-product-grid .store-product h3 { font-size: 27px; }
+
+/* Category Tabs Refinement */
+.category-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin: 0 0 34px;
+  border-bottom: 0;
+}
+
+.category-tab {
+  padding: 7px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(241, 233, 223, 0.16);
+  background: rgba(22, 11, 15, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: rgba(241, 233, 223, 0.72);
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.category-tab:hover {
+  border-color: rgba(216, 151, 145, 0.45);
+  color: #fff;
+  background: rgba(164, 80, 90, 0.18);
+  transform: translateY(-1px);
+}
+
+.category-tab.is-selected {
+  border-color: rgba(216, 151, 145, 0.75);
+  background: rgba(164, 80, 90, 0.32);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(164, 80, 90, 0.28);
+}
+
+/* Glassmorphic Botanical Product Cards */
+.shop-product-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 36px 26px;
+}
+
+.shop-product-grid .store-product {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  border-radius: 8px;
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.038) 0%, rgba(22, 10, 14, 0.48) 100%);
+  border: 1px solid rgba(241, 233, 223, 0.09);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 14px 34px -10px rgba(0, 0, 0, 0.45);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.45s ease;
+}
+
+.shop-product-grid .store-product:hover {
+  transform: translateY(-7px);
+  border-color: rgba(216, 151, 145, 0.35);
+  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.65), 0 0 25px rgba(183, 80, 96, 0.15);
+}
+
+.shop-product-grid .store-product-image {
+  aspect-ratio: 1 / 1.08;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #1e0e13;
+  position: relative;
+}
+
+.shop-product-grid .store-product-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 72%, rgba(10, 5, 7, 0.38) 100%);
+  transition: opacity 0.3s ease;
+}
+
+.shop-product-grid .store-product-image img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.shop-product-grid .store-product:hover .store-product-image img {
+  transform: scale(1.055);
+}
+
+.shop-product-grid .store-product h3 {
+  font-size: 26px;
+  margin: 2px 0 0;
+  letter-spacing: -0.01em;
+}
+
+.shop-product-grid .store-product-description {
+  flex-grow: 1;
+  min-height: 48px;
+  line-height: 1.65;
+  color: #bfaea9;
+}
+
+.shop-product-grid .store-product-buy {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(241, 233, 223, 0.08);
+}
+
+.shop-product-grid .store-product-buy button {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(241, 233, 223, 0.32);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  letter-spacing: 0.04em;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.shop-product-grid .store-product-buy button:hover {
+  background: var(--cream);
+  color: var(--ink);
+  border-color: var(--cream);
+  box-shadow: 0 4px 16px rgba(241, 233, 223, 0.22);
+  transform: translateY(-1px);
+}
+
 .shop-footer { grid-template-columns: 1fr 1fr 2fr auto; }
 
 @media (max-width: 1000px) {
