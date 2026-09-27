@@ -20,8 +20,9 @@ fs.mkdirSync(outputDirectory, { recursive: true });
 for (const file of siteFiles) {
   const src = path.join(projectRoot, file);
   if (fs.existsSync(src)) {
+    const allowedExtensions = new Set([".webp", ".jpg", ".jpeg", ".png"]);
     const options = file === "images"
-      ? { recursive: true, filter: (source) => source === src || path.extname(source).toLowerCase() === ".webp" }
+      ? { recursive: true, filter: (source) => source === src || allowedExtensions.has(path.extname(source).toLowerCase()) }
       : { recursive: true };
     fs.cpSync(src, path.join(outputDirectory, file), options);
   }

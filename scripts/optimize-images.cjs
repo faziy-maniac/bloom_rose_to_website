@@ -4,12 +4,12 @@ const { spawnSync } = require("node:child_process");
 
 const imageDirectory = path.resolve(__dirname, "..", "images");
 const ffmpeg = process.env.FFMPEG_PATH || require("ffmpeg-static");
-const sources = fs.readdirSync(imageDirectory).filter((name) => /\.jpeg\.jpg$/i.test(name));
+const sources = fs.readdirSync(imageDirectory).filter((name) => /\.(jpeg\.jpg|jpg|jpeg)$/i.test(name));
 
 for (const source of sources) {
   for (const size of [640, 1280, 1800]) {
     const suffix = size === 1800 ? ".webp" : `-${size}.webp`;
-    const output = path.join(imageDirectory, source.replace(/\.jpeg\.jpg$/i, suffix));
+    const output = path.join(imageDirectory, source.replace(/\.(jpeg\.jpg|jpg|jpeg)$/i, suffix));
     const result = spawnSync(ffmpeg, [
       "-hide_banner", "-loglevel", "error", "-y", "-i", path.join(imageDirectory, source),
       "-vf", `scale=${size}:${size}:force_original_aspect_ratio=decrease:force_divisible_by=2`,
